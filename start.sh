@@ -255,7 +255,7 @@ chkconfig --level 345 mysql on
 echo "============================mysql intall completed========================="
 
 #===============================================================================================
-#安装php
+#install php
 
 cd $cur_dir
 export PHP_AUTOCONF=/usr/local/autoconf-2.13/bin/autoconf

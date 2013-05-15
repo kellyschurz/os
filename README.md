@@ -1,4 +1,4 @@
-lnmp
+cnmp
 ====
 
-nginx+php+mysql
+centos+nginx+mysql+php

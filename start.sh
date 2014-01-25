@@ -263,7 +263,7 @@ export PHP_AUTOHEADER=/usr/local/autoconf-2.13/bin/autoheader
 tar zxvf php-5.3.22.tar.gz
 cd  php-5.3.22
 ./buildconf --force
-./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-mysql=/opt/mysql --with-mysqli=/opt/mysql/bin/mysql_config --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --with-mime-magic --enable-fpm
+./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-mysql=/opt/mysql --with-mysqli=/opt/mysql/bin/mysql_config --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --disable-fileinfo --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --with-mime-magic --enable-fpm
 make ZEND_EXTRA_LIBS='-liconv'
 make install
 

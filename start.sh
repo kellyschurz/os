@@ -274,10 +274,6 @@ make install
 cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod +x /etc/init.d/php-fpm
 
-cd ext/pdo_mysql/
-/opt/php/bin/phpize
-./configure --with-php-config=/opt/php/bin/php-config --with-pdo-mysql=/opt/mysql
-make && make install
 cd $cur_dir
 
 tar zxvf memcache-3.0.6.tgz
@@ -310,7 +306,7 @@ mkdir -p /tmp/eaccelerator_cache
 make && make install
 cd ../
 mkdir -p /opt/php/etc
-cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+
 cp php.ini /opt/php/etc/php.ini
 cp php-fpm.conf /opt/php/etc/php-fpm.conf
 groupadd www

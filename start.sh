@@ -310,7 +310,7 @@ mkdir -p /tmp/eaccelerator_cache
 make && make install
 cd ../
 mkdir -p /opt/php/etc
-cp /usr/local/src/php-5.3.3/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 cp php.ini /opt/php/etc/php.ini
 cp php-fpm.conf /opt/php/etc/php-fpm.conf
 groupadd www

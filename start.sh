@@ -290,11 +290,11 @@ ln -s /opt/php/sbin/php-fpm /usr/bin/php-fpm
 if [ `getconf WORD_BIT` = '32' ] && [ `getconf LONG_BIT` = '64' ] ; then
     tar zxvf ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64.tar.gz
 	mkdir -p /usr/local/zend/
-	cp ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64/ZendGuardLoader.so /usr/local/zend/
+	cp ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64/php-5.4.x/ZendGuardLoader.so /usr/local/zend/
 else
 	tar zxvf ZendGuardLoader-70429-PHP-5.4-linux-glibc23-i386.tar.gz
 	mkdir -p /usr/local/zend/
-	cp ZendGuardLoader-70429-PHP-5.4-linux-glibc23-i386/ZendGuardLoader.so /usr/local/zend/
+	cp ZendGuardLoader-70429-PHP-5.4-linux-glibc23-i386/php-5.4.x/ZendGuardLoader.so /usr/local/zend/
 fi
 cd $cur_dir
 

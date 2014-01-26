@@ -46,11 +46,11 @@ do yum -y install $packages; done
 
 
 echo "============================check files=================================="
-if [ -s php-5.3.22.tar.gz ]; then
-  echo "php-5.3.22.tar.gz [found]"
+if [ -s php-5.4.24.tar.gz ]; then
+  echo "php-5.4.24.tar.gz [found]"
   else
-  echo "Error: php-5.3.22.tar.gz not found!!!download now......"
-  wget -c http://www.php.net/get/php-5.3.22.tar.gz/from/this/mirror
+  echo "Error: php-5.4.24.tar.gz not found!!!download now......"
+  wget -c http://us1.php.net/get/php-5.4.24.tar.gz/from/this/mirror
 fi
 
 if [ -s mysql-5.1.68.tar.gz ]; then
@@ -108,20 +108,20 @@ if [ -s mcrypt-2.6.8.tar.gz ]; then
   echo "Error: mcrypt-2.6.8.tar.gz not found!!!download now......"
   wget -c https://downloads.sourceforge.net/project/mcrypt/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz
 fi
-if [ -s autoconf-2.13.tar.gz ]; then
-  echo "autoconf-2.13.tar.gz [found]"
+if [ -s autoconf-2.69.tar.gz ]; then
+  echo "autoconf-2.69.tar.gz [found]"
   else
-  echo "Error: autoconf-2.13.tar.gz not found!!!download now......"
-  wget -c http://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz
+  echo "Error: autoconf-2.69.tar.gz not found!!!download now......"
+  wget -c http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
 fi
 echo "============================check files=================================="
 
 
 echo "============================start install================================"
 cd $cur_dir
-tar zxvf autoconf-2.13.tar.gz
-cd autoconf-2.13/
-./configure --prefix=/usr/local/autoconf-2.13
+tar zxvf autoconf-2.69.tar.gz
+cd autoconf-2.69/
+./configure --prefix=/usr/local/autoconf-2.69
 make && make install
 cd ../
 
@@ -262,12 +262,12 @@ echo "============================mysql intall completed========================
 #install php
 
 cd $cur_dir
-export PHP_AUTOCONF=/usr/local/autoconf-2.13/bin/autoconf
-export PHP_AUTOHEADER=/usr/local/autoconf-2.13/bin/autoheader
-tar zxvf php-5.3.22.tar.gz
-cd  php-5.3.22
+export PHP_AUTOCONF=/usr/local/autoconf-2.69/bin/autoconf
+export PHP_AUTOHEADER=/usr/local/autoconf-2.69/bin/autoheader
+tar zxvf php-5.4.24.tar.gz
+cd  php-5.4.24
 ./buildconf --force
-./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-mysql=/opt/mysql --with-mysqli=/opt/mysql/bin/mysql_config --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-magic-quotes --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --disable-fileinfo --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --with-mime-magic --enable-fpm
+./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath    --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --disable-fileinfo --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-fpm
 make ZEND_EXTRA_LIBS='-liconv'
 make install
 

@@ -19,6 +19,10 @@ cur_dir=$(pwd)
 rm -rf /etc/localtime
 ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+yum install -y ntp
+ntpdate -u pool.ntp.org
+date
+
 rpm -qa|grep  httpd
 rpm -e httpd
 rpm -qa|grep mysql

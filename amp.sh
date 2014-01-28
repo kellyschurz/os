@@ -276,8 +276,8 @@ cd $cur_dir
 tar zxvf httpd-2.4.7.tar.gz
 tar zxvf apr-1.5.0.tar.gz
 tar zxvf apr-util-1.5.3.tar.gz
-cp -R apr-1.5.0 ./httpd-2.4.7/srclib/
-cp -R apr-util-1.5.3 ./httpd-2.4.7/srclib/
+cp -R apr-1.5.0 ./httpd-2.4.7/srclib/apr
+cp -R apr-util-1.5.3 ./httpd-2.4.7/srclib/apr-util
 cd httpd-2.4.7
 ./configure --prefix=/opt/apache --enable-headers --enable-mime-magic --enable-proxy --enable-so --enable-rewrite --enable-ssl --enable-deflate --enable-suexec --disable-userdir --with-included-apr --with-mpm=prefork --with-ssl=/usr --disable-userdir --disable-cgid --disable-cgi --enable-cache --enable-disk-cache --enable-mem-cache --enable-file-cache
 make && make install

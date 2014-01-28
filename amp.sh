@@ -355,7 +355,5 @@ cp init.d.nginx /etc/init.d/nginx
 chmod +x /etc/init.d/nginx
 
 chkconfig --level 345 nginx on
-chkconfig --level 345 php-fpm on
 service mysql start
-service php-fpm start
 service nginx start

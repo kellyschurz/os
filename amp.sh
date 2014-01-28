@@ -46,6 +46,13 @@ do yum -y install $packages; done
 
 
 echo "============================check files=================================="
+if [ -s httpd-2.4.7.tar.gz]; then
+  echo "httpd-2.4.7.tar.gz [found]"
+  else
+  echo "Error: httpd-2.4.7.tar.gz not found!!!download now......"
+  wget -c http://www.eu.apache.org/dist//httpd/httpd-2.4.7.tar.gz
+fi
+
 if [ -s php-5.4.24.tar.gz ]; then
   echo "php-5.4.24.tar.gz [found]"
   else
@@ -257,6 +264,22 @@ chkconfig --level 345 mysql on
 /etc/init.d/mysql restart
 /etc/init.d/mysql stop
 echo "============================mysql intall completed========================="
+#install apache
+groupadd www
+useradd -s /sbin/nologin -g www www
+mkdir -p /opt/wwwroot
+chmod +w /opt/wwwroot
+mkdir -p /opt/wwwlogs
+chmod 777 /opt/wwwlogs
+
+cd $cur_dir
+tar zxvf httpd-2.4.7.tar.gz
+cd httpd-2.4.7
+./configure --prefix=/opt/apache --enable-headers --enable-mime-magic --enable-proxy --enable-so --enable-rewrite --enable-ssl --enable-deflate --enable-suexec --disable-userdir --with-included-apr --with-mpm=prefork --with-ssl=/usr --disable-userdir --disable-cgid --disable-cgi --enable-cache --enable-disk-cache --enable-mem-cache --enable-file-cache
+make && make install
+mv /opt/apache/conf/httpd.conf /opt/apache/conf/httpd.conf.default 
+cd $cur_dir
+cp httpd.conf /opt/apache/conf/httpd.conf 
 
 #===============================================================================================
 #install php
@@ -267,12 +290,9 @@ export PHP_AUTOHEADER=/usr/local/autoconf-2.69/bin/autoheader
 tar zxvf php-5.4.24.tar.gz
 cd  php-5.4.24
 ./buildconf --force
-./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath    --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --disable-fileinfo --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-fpm
+./configure --prefix=/opt/php --with-config-file-path=/opt/php/etc --with-apxs2=/opt/apache/bin/apxs  --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv=/usr/local/libiconv --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath   --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-mbstring --with-mcrypt --enable-ftp --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --disable-fileinfo --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext
 make ZEND_EXTRA_LIBS='-liconv'
 make install
-
-cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x /etc/init.d/php-fpm
 
 cd $cur_dir
 
@@ -285,7 +305,6 @@ cd ../
 
 ln -s /opt/php/bin/php /usr/bin/php
 ln -s /opt/php/bin/phpize /usr/bin/phpize
-ln -s /opt/php/sbin/php-fpm /usr/bin/php-fpm
 
 if [ `getconf WORD_BIT` = '32' ] && [ `getconf LONG_BIT` = '64' ] ; then
     tar zxvf ZendGuardLoader-70429-PHP-5.4-linux-glibc23-x86_64.tar.gz
@@ -308,16 +327,8 @@ cd ../
 mkdir -p /opt/php/etc
 
 cp php.ini /opt/php/etc/php.ini
-cp php-fpm.conf /opt/php/etc/php-fpm.conf
-groupadd www
-useradd -s /sbin/nologin -g www www
 
 #install nginx
-mkdir -p /opt/wwwroot
-chmod +w /opt/wwwroot
-mkdir -p /opt/wwwlogs
-chmod 777 /opt/wwwlogs
-
 tar zxvf pcre-8.30.tar.gz
 cd pcre-8.30/
 ./configure

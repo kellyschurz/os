@@ -190,6 +190,8 @@ fi
 
 ldconfig
 
+ulimit -SHn 65535
+
 cat >>/etc/security/limits.conf<<eof
 * soft nproc 65535
 * hard nproc 65535
